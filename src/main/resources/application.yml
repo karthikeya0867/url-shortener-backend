@@ -1,0 +1,25 @@
+spring:
+
+  application:
+    name : URL-SHORTENER(snip-it)
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+
+  config:
+    import: optional:file:.env[.properties]
+
+server:
+  servlet:
+    context-path: /api
+  port: ${PORT:8080}
+
+url:
+    bitmask: ${BIT_MASK}
