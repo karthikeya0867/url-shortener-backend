@@ -3,8 +3,11 @@ FROM eclipse-temurin:21-jdk AS builder
 
 WORKDIR /app
 
-# Copy all project files
+# Copy project files
 COPY . .
+
+# FIX: make mvnw executable (Linux needs this)
+RUN chmod +x mvnw
 
 # Build the Spring Boot application
 RUN ./mvnw clean package -DskipTests
