@@ -5,7 +5,6 @@ import com.karthikeya.urlshortener.dto.UrlResponse;
 import com.karthikeya.urlshortener.service.UrlService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +29,10 @@ public class UrlController {
     }
 
     @GetMapping("/{shortCode}")
-    public ResponseEntity<@NonNull Void> getEntry(@PathVariable String shortCode) {
+    public ResponseEntity<@NonNull UrlResponse> getEntry(@PathVariable String shortCode) {
         String url = urlService.getOriginalUrl(shortCode);
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .header(HttpHeaders.LOCATION,url)
-                .build();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new UrlResponse(url , shortCode));
     }
 }
 
